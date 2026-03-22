@@ -1,0 +1,7 @@
+{
+  "name": "typebot-site-update",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
