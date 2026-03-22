@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criação de Sites — Thiago Pereira Freire</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0e0f0e;
+    --surface: #161817;
+    --border: #2a2d2a;
+    --accent: #b5f059;
+    --accent2: #7be0c2;
+    --text: #e8ede8;
+    --muted: #8a9488;
+    --card: #1a1d1a;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrapper { max-width: 1100px; margin: 0 auto; padding: 52px 32px 80px; }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 72px;
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 7px 16px;
+    border-radius: 100px;
+    text-decoration: none;
+    color: var(--muted);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .nav-link:hover { color: var(--text); border-color: var(--border); }
+  .nav-link.active { color: var(--bg); background: var(--accent); border-color: var(--accent); font-weight: 500; }
+
+  /* HERO */
+  .hero {
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 72px;
+    max-width: 720px;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc { color: var(--muted); font-size: 16px; font-weight: 300; line-height: 1.8; margin-bottom: 36px; }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.8; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PLANOS */
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .plan {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: border-color 0.2s;
+  }
+  .plan:hover { border-color: #3a3f3a; }
+  .plan.featured {
+    border-color: rgba(181,240,89,.4);
+    background: rgba(181,240,89,.04);
+  }
+  .plan-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+  .plan-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .plan-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: -0.03em;
+  }
+  .plan-price-note { font-size: 12px; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+  .plan-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5; }
+  .plan-features li::before { content: ''; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+  .plan-features li.highlight { color: var(--text); font-weight: 400; }
+  .plan-monthly {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+  }
+
+  /* COMO FUNCIONA */
+  .how {
+    margin-bottom: 72px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    letter-spacing: 0.1em;
+  }
+  .step-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .step-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.65; }
+
+  /* NICHOS */
+  .nichos {
+    margin-bottom: 72px;
+  }
+  .nicho-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nicho-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 9px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* CTA FINAL */
+  .final-cta {
+    background: var(--card);
+    border: 1px solid rgba(181,240,89,.3);
+    border-radius: 24px;
+    padding: 52px 48px;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .final-cta h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--accent); }
+  .final-cta p { color: var(--muted); font-weight: 300; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.75; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: var(--bg);
+    font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
+    padding: 14px 32px; border-radius: 100px; text-decoration: none; transition: opacity 0.2s;
+  }
+  .cta-primary:hover { opacity: 0.8; }
+  .cta-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: 13px;
+    padding: 14px 32px; border-radius: 100px; text-decoration: none; transition: all 0.2s;
+  }
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer { text-align: center; border-top: 1px solid var(--border); padding-top: 32px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+  footer span { color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .plans { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .final-cta { padding: 36px 24px; }
+  }
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+  @keyframes up { from{ opacity:0; transform:translateY(20px); } to{ opacity:1; transform:translateY(0); } }
+  .hero, .plan, .step { animation: up 0.55s ease both; }
+  .plan:nth-child(1){ animation-delay:.05s; }
+  .plan:nth-child(2){ animation-delay:.12s; }
+  .plan:nth-child(3){ animation-delay:.18s; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <nav>
+    <span class="nav-logo">thiago.dev</span>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Portfólio</a>
+      <a class="nav-link active" href="sites.html">Criação de Sites</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Serviço · Sites Profissionais</div>
+    <h1>Seu negócio<br>merece um site<br><em>de verdade.</em></h1>
+    <p class="hero-desc">
+      Crio sites profissionais para pequenos negócios, autônomos e empreendedores — com entrega rápida, visual moderno e suporte contínuo todo mês.
+    </p>
+    <a class="hero-cta" href="https://wa.me/5573982277649?text=Olá%20Thiago,%20quero%20um%20site!" target="_blank">
+      Quero meu site →
+    </a>
+  </section>
+
+  <!-- PLANOS -->
+  <div class="section-label">Planos</div>
+  <div class="plans">
+
+    <div class="plan">
+      <div class="plan-name">Landing Page</div>
+      <div class="plan-price">R$ 600</div>
+      <div class="plan-price-note">pagamento único na criação</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li class="highlight">1 página completa</li>
+        <li>Apresentação do negócio</li>
+        <li>Botão WhatsApp</li>
+        <li>Design responsivo (celular)</li>
+        <li>Entrega em até 5 dias</li>
+      </ul>
+      <div class="plan-monthly">+ R$ 80/mês · hospedagem e suporte</div>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">Mais popular</div>
+      <div class="plan-name">Site Institucional</div>
+      <div class="plan-price">R$ 1.200</div>
+      <div class="plan-price-note">pagamento único na criação</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li class="highlight">Até 5 páginas</li>
+        <li>Home, Sobre, Serviços, Contato</li>
+        <li>Formulário de contato</li>
+        <li>Google Maps integrado</li>
+        <li>Design responsivo</li>
+        <li>SEO básico</li>
+        <li>Entrega em até 10 dias</li>
+      </ul>
+      <div class="plan-monthly">+ R$ 120/mês · hospedagem e suporte</div>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Personalizado</div>
+      <div class="plan-price">sob consulta</div>
+      <div class="plan-price-note">orçamento sem compromisso</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li class="highlight">Projeto sob medida</li>
+        <li>E-commerce / loja virtual</li>
+        <li>Painel administrativo</li>
+        <li>Blog ou portfólio</li>
+        <li>Integrações específicas</li>
+        <li>Funcionalidades em Python</li>
+      </ul>
+      <div class="plan-monthly">mensalidade conforme o projeto</div>
+    </div>
+
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="section-label">Como funciona</div>
+  <div class="how">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Briefing</div>
+        <div class="step-desc">Você me conta sobre seu negócio, o que precisa e seus objetivos. Tudo por WhatsApp ou chamada.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Criação</div>
+        <div class="step-desc">Desenvolvo o site com design moderno e responsivo, adaptado ao seu nicho.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Revisão</div>
+        <div class="step-desc">Você aprova ou pede ajustes. Até 2 rodadas de revisão inclusas em todos os planos.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">No ar</div>
+        <div class="step-desc">Coloco o site no ar com domínio e hospedagem. Suporte contínuo todo mês.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NICHOS -->
+  <div class="section-label">Para quem é</div>
+  <div class="nichos">
+    <div class="nicho-grid">
+      <span class="nicho-pill">Restaurantes e lanchonetes</span>
+      <span class="nicho-pill">Salões de beleza</span>
+      <span class="nicho-pill">Advogados e contadores</span>
+      <span class="nicho-pill">Clínicas e consultórios</span>
+      <span class="nicho-pill">Lojas e comércios locais</span>
+      <span class="nicho-pill">Fotógrafos e artistas</span>
+      <span class="nicho-pill">Prestadores de serviço</span>
+      <span class="nicho-pill">Professores e coaches</span>
+      <span class="nicho-pill">Pequenas empresas</span>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="final-cta">
+    <h2>Pronto para ter<br>seu site no <em>ar</em>?</h2>
+    <p>Entre em contato agora e receba um orçamento gratuito em menos de 24 horas.</p>
+    <div class="cta-buttons">
+      <a class="cta-primary" href="https://wa.me/5573982277649?text=Olá%20Thiago,%20quero%20um%20site!" target="_blank">
+        WhatsApp → orçamento grátis
+      </a>
+      <a class="cta-secondary" href="mailto:thiagopfreire160@gmail.com">
+        Enviar e-mail
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Thiago Pereira Freire &nbsp;·&nbsp; <span>2025</span> &nbsp;·&nbsp; Vitória da Conquista — BA</p>
+  </footer>
+
+</div>
+</body>
+</html>
