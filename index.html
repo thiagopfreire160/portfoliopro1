@@ -693,26 +693,57 @@ footer span { color: var(--accent); }
 }
 
 /* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .wrapper { padding: 44px 22px 70px; }
+  .hero { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }
+  .hscroll-section { margin: 0 -18px 62px; padding: 38px 18px; }
+  .hscroll-item { padding: 14px 16px; }
+  .hscroll-heading { font-size: clamp(1.85rem, 6.8vw, 2.7rem); }
+  #spotlight { width: 320px; height: 320px; }
+}
 @media (max-width: 900px) {
   .bento-card.col-4 { grid-column: span 6; }
   .bento-card.col-8 { grid-column: span 6; }
+  .hero { grid-template-columns: 1fr; gap: 30px; }
+  .photo-frame { order: -1; max-width: 220px; margin: 0 auto; }
+  .hero h1 { font-size: clamp(2.4rem, 7vw, 3.8rem); }
+  .hero-desc { max-width: 100%; }
 }
 @media (max-width: 760px) {
-  .wrapper { padding: 40px 16px 64px; }
-  nav { margin-bottom: 48px; }
-  .hero { grid-template-columns: 1fr; gap: 32px; }
-  .photo-frame { order: -1; max-width: 160px; margin: 0 auto; }
+  .wrapper { padding: 38px 14px 62px; }
+  nav { margin-bottom: 40px; }
+  .hero { grid-template-columns: 1fr; gap: 26px; }
+  .photo-frame { order: -1; max-width: 180px; margin: 0 auto; }
   .bento-card.col-4,
   .bento-card.col-6,
   .bento-card.col-8 { grid-column: span 12; }
   .skill-grid { grid-template-columns: 1fr; }
-  .services-cta { flex-direction: column; padding: 24px 20px; }
-  #spotlight { display: none; }
-  .hscroll-section { margin: 0 -16px 56px; padding: 48px 16px; }
-  .hscroll-item { padding: 12px 16px; }
-  .hscroll-heading { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .services-cta { flex-direction: column; padding: 22px 14px; }
   .nav-logo { display: none; }
 }
+@media (max-width: 640px) {
+  .wrapper { padding: 32px 12px 54px; }
+  .hero { padding-bottom: 58px; }
+  .hero h1 { font-size: clamp(2rem, 8vw, 3.2rem); }
+  .hero-desc { font-size: 14px; }
+  .hero-role { font-size: 11px; }
+  .hero-contacts { flex-direction: column; gap: 8px; }
+  .contact-pill { width: 100%; justify-content: center; }
+  .photo-frame { max-width: 220px; }
+  .hscroll-section { margin: 0 -12px 52px; padding: 40px 12px; }
+  .hscroll-item { min-width: 170px; }
+}
+@media (max-width: 480px) {
+  .wrapper { padding: 26px 10px 48px; }
+  .hero { gap: 18px; }
+  .hero h1 { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+  .hero-desc { font-size: 13px; line-height: 1.6; }
+  .photo-frame { max-width: 180px; }
+  .bg-orb-1, .bg-orb-2, .bg-orb-3 { display: none; }
+  #spotlight { display: none; }
+}
+
 </style>
 </head>
 <body>
