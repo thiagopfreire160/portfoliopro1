@@ -1061,6 +1061,58 @@ document.querySelectorAll('.skill-item').forEach(el => {
         item.style.transform = `translateY(${parallaxAmount * (i + 1) * 0.2}px)`;
       });
     });
+
+    // Texto embaralhado cíclico no título
+    const scrambleTargets = [
+      { el: document.querySelector('.hero h1 .line-1'), words: ['Thiago', 'Techago', 'Th!ago'] },
+      { el: document.querySelector('.hero h1 .line-2'), words: ['Pereira', 'P3re1ra', 'Pereira'] },
+      { el: document.querySelector('.hero h1 .line-3'), words: ['Freire', 'Fr3ir3', 'Freire'] }
+    ];
+
+    function scrambleWord(el, word, duration) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+      let frame = 0;
+      const totalFrames = Math.round(duration / 30);
+      const original = word;
+
+      const interval = setInterval(() => {
+        frame++;
+        let output = '';
+        for (let i = 0; i < original.length; i++) {
+          if (frame > totalFrames * (i / original.length) ) {
+            output += original[i];
+          } else {
+            output += chars[Math.floor(Math.random() * chars.length)];
+          }
+        }
+        el.textContent = output;
+
+        if (frame >= totalFrames) {
+          clearInterval(interval);
+          el.textContent = original;
+        }
+      }, 30);
+    }
+
+    function startCycle() {
+      let i1 = 0;
+      let i2 = 0;
+      let i3 = 0;
+      setInterval(() => {
+        scrambleWord(scrambleTargets[0].el, scrambleTargets[0].words[i1], 550);
+        i1 = (i1 + 1) % scrambleTargets[0].words.length;
+      }, 3600);
+      setInterval(() => {
+        scrambleWord(scrambleTargets[1].el, scrambleTargets[1].words[i2], 650);
+        i2 = (i2 + 1) % scrambleTargets[1].words.length;
+      }, 4000);
+      setInterval(() => {
+        scrambleWord(scrambleTargets[2].el, scrambleTargets[2].words[i3], 700);
+        i3 = (i3 + 1) % scrambleTargets[2].words.length;
+      }, 4200);
+    }
+
+    startCycle();
   }
 </script>
 </html>
