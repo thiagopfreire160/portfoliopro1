@@ -159,7 +159,8 @@ nav {
   letter-spacing: 0.12em;
   margin-bottom: 20px;
   opacity: 0;
-  animation: slideUp .5s ease .2s both;
+  transform: translateY(10px);
+  transition: transform .5s ease, opacity .5s ease;
 }
 .hero h1 {
   font-family: 'DM Serif Display', serif;
@@ -169,20 +170,15 @@ nav {
   letter-spacing: -0.025em;
   margin-bottom: 24px;
 }
-.hero h1 .line-1 {
-  display: block;
-  opacity: 0;
-  animation: slideUp .6s ease .35s both;
-}
-.hero h1 .line-2 {
-  display: block;
-  opacity: 0;
-  animation: slideUp .6s ease .5s both;
-}
+.hero h1 .line-1,
+.hero h1 .line-2,
 .hero h1 .line-3 {
   display: block;
   opacity: 0;
-  animation: slideUp .6s ease .65s both;
+  transform: translateY(14px);
+  transition: transform .55s ease, opacity .55s ease;
+}
+.hero h1 .line-3 {
   font-style: italic;
   background: linear-gradient(120deg, var(--accent), var(--cyan));
   -webkit-background-clip: text;
@@ -197,15 +193,24 @@ nav {
   margin-bottom: 36px;
   line-height: 1.8;
   opacity: 0;
-  animation: slideUp .6s ease .8s both;
+  transform: translateY(16px);
+  transition: transform .6s ease, opacity .6s ease;
 }
 .hero-contacts {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   opacity: 0;
-  animation: slideUp .6s ease .95s both;
+  transform: translateY(16px);
+  transition: transform .6s ease, opacity .6s ease;
 }
+
+.hero.in-view .hero-role { opacity:1; transform:translateY(0); transition-delay:.1s; }
+.hero.in-view .hero h1 .line-1 { opacity:1; transform:translateY(0); transition-delay:.15s; }
+.hero.in-view .hero h1 .line-2 { opacity:1; transform:translateY(0); transition-delay:.27s; }
+.hero.in-view .hero h1 .line-3 { opacity:1; transform:translateY(0); transition-delay:.4s; }
+.hero.in-view .hero-desc { opacity:1; transform:translateY(0); transition-delay:.6s; }
+.hero.in-view .hero-contacts { opacity:1; transform:translateY(0); transition-delay:.75s; }
 
 /* ─── HERO SCROLL EFFECT ─── */
 .hero { transition: transform .3s ease-out, filter .3s ease-out; }
