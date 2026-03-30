@@ -207,6 +207,25 @@ nav {
   animation: slideUp .6s ease .95s both;
 }
 
+/* ─── HERO SCROLL EFFECT ─── */
+.hero { transition: transform .3s ease-out, filter .3s ease-out; }
+.hero h1, .hero-role, .hero-desc, .hero-contacts { will-change: transform, opacity; }
+.hero[data-scrolled='1'] h1 { transform: translateY(-10px); opacity: .92; }
+.hero[data-scrolled='1'] .hero-desc { transform: translateY(-12px); opacity: .85; }
+.hero[data-scrolled='1'] .hero-contacts { transform: translateY(-14px); opacity: .85; }
+
+.hero-background-glow {
+  position: absolute; inset: -24px;
+  pointer-events: none;
+  border-radius: 32px;
+  border: 1px solid rgba(126,232,162,.18);
+  box-shadow: 0 0 40px rgba(126,232,162,.14), 0 0 24px rgba(79,142,247,.08);
+  opacity: .1;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 0;
+}
+.hero[data-scrolled='1'] .hero-background-glow { opacity: .2; transform: translateY(-6px) scale(1.01); }
+
 @keyframes slideUp {
   from { opacity:0; transform:translateY(18px); }
   to   { opacity:1; transform:translateY(0); }
@@ -713,6 +732,7 @@ footer span { color: var(--accent); }
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-background-glow"></div>
     <div>
       <div class="hero-role">Python Developer · Full Stack</div>
       <h1>
@@ -967,4 +987,30 @@ document.querySelectorAll('.skill-item').forEach(el => {
 });
 </script>
 </body>
+<script>
+  const heroSection = document.querySelector('.hero');
+  const heroItems = document.querySelectorAll('.hero h1 span, .hero-role, .hero-desc, .hero-contacts');
+
+  window.addEventListener('scroll', () => {
+    const sc = window.scrollY;
+    const max = 200;
+    const progress = Math.min(sc / max, 1);
+
+    // parallax text container
+    heroSection.style.transform = `translateY(${progress * -10}px)`;
+    heroSection.style.filter = `blur(${Math.min(progress * 2, 1)}px)`;
+
+    if (progress > 0.05) {
+      heroSection.dataset.scrolled = '1';
+    } else {
+      heroSection.dataset.scrolled = '0';
+    }
+
+    heroItems.forEach((item, index) => {
+      const offset = Math.min(progress * 32, 22);
+      item.style.transform = `translateY(-${offset - index * 2}px)`;
+      item.style.opacity = `${Math.max(1 - progress * 0.35, 0.7)}`;
+    });
+  });
+</script>
 </html>
