@@ -86,7 +86,7 @@ body::before {
   z-index: 2;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 52px 32px 80px;
+  padding: 24px 14px 48px;
 }
 
 /* ─── NAV ─── */
@@ -94,8 +94,49 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   animation: fadeDown .6s ease both;
+  gap: 10px;
+}
+
+.nav-links { display: flex; gap: 5px; }
+
+/* ─── HERO (mobile-first) ─── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.hero-role { font-size: 11px; margin-bottom: 12px; }
+.hero h1 { font-size: clamp(2rem, 10vw, 3.2rem); margin-bottom: 16px; }
+.hero-desc { font-size: 14px; margin-bottom: 24px; }
+.hero-contacts { flex-direction: column; gap: 8px; }
+.photo-frame { max-width: 200px; margin: 0 auto; order: -1; }
+
+/* ─── DESKTOP UPGRADE ─── */
+@media (min-width: 768px) {
+  .wrapper { padding: 36px 20px 60px; }
+  nav { margin-bottom: 56px; }
+  .hero { grid-template-columns: 1fr 260px; gap: 32px; margin-bottom: 64px; padding-bottom: 64px; }
+  .hero h1 { font-size: clamp(2.2rem, 8vw, 3.8rem); }
+  .hero-desc { font-size: 15px; max-width: 460px; }
+  .hero-contacts { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .photo-frame { order: 0; max-width: 260px; }
+  .nav-links { gap: 8px; }
+}
+
+@media (min-width: 1100px) {
+  .wrapper { padding: 52px 32px 80px; }
+  .hero { gap: 64px; }
+  .hero h1 { font-size: clamp(2.8rem, 5vw, 4.4rem); }
+  .photo-frame { max-width: 280px; }
+  nav { margin-bottom: 80px; }
 }
 @keyframes fadeDown { from{ opacity:0; transform:translateY(-12px); } to{ opacity:1; transform:translateY(0); } }
 
