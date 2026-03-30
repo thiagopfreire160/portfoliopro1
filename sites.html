@@ -57,15 +57,64 @@ body::before {
   transform:translate(-50%,-50%);
 }
 
-/* ── WRAPPER ── */
-.wrapper { position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:52px 24px 80px; }
+/* ── WRAPPER MOBILE-FIRST ── */
+.wrapper {
+  position:relative; z-index:2; max-width:1100px; margin:0 auto;
+  padding:24px 14px 48px;
+}
 
-/* ── NAV ── */
+/* ── NAV MOBILE-FIRST ── */
 nav {
   display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:72px;
+  gap:10px; margin-bottom:42px;
   animation:fadeDown .6s ease both;
+  flex-wrap:wrap;
 }
+.nav-links { display:flex; gap:6px; }
+
+@media (min-width: 768px) {
+  .wrapper { padding:36px 20px 64px; }
+  nav { margin-bottom:56px; }
+  .nav-links { gap:8px; }
+}
+
+@media (min-width: 1100px) {
+  .wrapper { padding:52px 30px 80px; }
+  nav { margin-bottom:72px; }
+}
+
+/* ── HERO MOBILE-FIRST ── */
+.hero {
+  display:grid; grid-template-columns:1fr; gap:18px;
+  padding-bottom:40px; border-bottom:1px solid var(--border); margin-bottom:40px;
+  position:relative;
+}
+.hero::before {
+  content:''; position:absolute; top:-30px; left:0;
+  width:100%; max-width:480px; height:260px;
+  background:radial-gradient(ellipse,rgba(79,142,247,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-tag { font-size:10px; margin-bottom:12px; }
+.hero h1 { font-size:clamp(2rem, 9vw, 3rem); margin-bottom:18px; }
+.hero-desc { font-size:14px; max-width:100%; margin-bottom:22px; }
+.hero-cta { padding:12px 20px; font-size:13px; }
+
+@media (min-width: 768px) {
+  .hero { grid-template-columns:1fr 260px; gap:36px; padding-bottom:64px; margin-bottom:72px; }
+  .hero h1 { font-size:clamp(2.4rem, 8vw, 3.6rem); }
+  .hero-desc { max-width:560px; }
+  .hero-cta { padding:14px 24px; }
+  .photo-frame { max-width:260px; margin:0; order:0; }
+}
+
+@media (min-width: 1100px) {
+  .hero { gap:64px; }
+  .hero h1 { font-size:clamp(2.8rem, 5vw, 4rem); }
+  .wrapper { padding:52px 24px 80px; }
+  .hero::before { top:-60px; height:360px; }
+}
+
 @keyframes fadeDown { from{opacity:0;transform:translateY(-12px);} to{opacity:1;transform:translateY(0);} }
 .nav-logo { font-family:'DM Mono',monospace; font-size:13px; color:var(--muted); letter-spacing:.08em; }
 .nav-links { display:flex; gap:4px; }
