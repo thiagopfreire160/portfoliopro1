@@ -721,6 +721,12 @@ footer span { color: var(--accent); }
   #spotlight { display: none; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  html { scroll-behavior: auto !important; }
+  .hero, .hero h1, .hero h1 span, .hero-role, .hero-desc, .hero-contacts, .hero-background-glow { transform: none !important; opacity: 1 !important; filter: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1034,6 +1040,8 @@ document.querySelectorAll('.skill-item').forEach(el => {
     const heroDesc = heroSection.querySelector('.hero-desc');
     const heroContacts = heroSection.querySelector('.hero-contacts');
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1046,6 +1054,17 @@ document.querySelectorAll('.skill-item').forEach(el => {
     observer.observe(heroSection);
 
     window.addEventListener('scroll', () => {
+      if (prefersReducedMotion) {
+        heroSection.style.transform = 'none';
+        heroSection.style.filter = 'none';
+        heroSection.style.opacity = '1';
+        heroRole.style.transform = 'none';
+        heroDesc.style.transform = 'none';
+        heroContacts.style.transform = 'none';
+        heroTitle.forEach((item) => item.style.transform = 'none');
+        return;
+      }
+
       const y = window.scrollY;
       const v = Math.max(1 - y / 420, 0.82);
       heroSection.style.transform = `translateY(${Math.min(y * 0.08, 16)}px)`;
@@ -1095,6 +1114,11 @@ document.querySelectorAll('.skill-item').forEach(el => {
     }
 
     function startCycle() {
+      if (prefersReducedMotion) {
+        scrambleTargets.forEach((target) => target.el.textContent = target.words[0]);
+        return;
+      }
+
       let i1 = 0;
       let i2 = 0;
       let i3 = 0;
