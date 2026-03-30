@@ -144,29 +144,52 @@ nav {
 .reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ── PLANS ── */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:80px;}
-.plan{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:20px;padding:32px 26px;
-  display:flex;flex-direction:column;
-  transition:border-color .3s,box-shadow .3s,transform .3s;
-  position:relative;overflow:hidden;
-}
-.plan::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,247,.03),transparent 60%);pointer-events:none;}
-.plan:hover{border-color:var(--border-h);box-shadow:0 0 0 1px rgba(79,142,247,.1),0 8px 32px rgba(0,0,0,.3);transform:translateY(-4px);}
-.plan.featured{border-color:rgba(126,232,162,.3);background:rgba(126,232,162,.03);}
-.plan.featured:hover{border-color:rgba(126,232,162,.5);box-shadow:0 0 0 1px rgba(126,232,162,.15),0 8px 40px rgba(0,0,0,.3),0 0 60px rgba(126,232,162,.07);}
-.plan-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--bg);background:var(--accent);padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:20px;text-transform:uppercase;font-weight:500;align-self:flex-start;box-shadow:0 0 12px rgba(126,232,162,.3);}
-.plan-name{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:6px;}
-.plan-price{font-family:'DM Mono',monospace;font-size:2rem;font-weight:500;color:var(--accent);margin-bottom:4px;letter-spacing:-.03em;}
-.plan-price-note{font-size:12px;color:var(--muted);margin-bottom:28px;font-weight:300;}
-.plan-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.pricing-section{position:relative;margin-bottom:80px;}
+.pricing-section::before{content:'';position:absolute;inset:0;background:linear-gradient(140deg,rgba(126,232,162,.05),rgba(79,142,247,.04) 40%,rgba(13,21,31,.4));pointer-events:none;mix-blend-mode:overlay;}
+.pricing-section::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.08'/%3E%3C/svg%3E");pointer-events:none;opacity:.3;mix-blend-mode:screen;}
+.pricing-section > *{position:relative;z-index:2;}
+.pricing-header h2{font-size:clamp(1.7rem,2.5vw,2.4rem);margin-bottom:8px;}
+.pricing-header p{font-size:clamp(1rem,1.7vw,1.15rem);color:var(--muted);margin-bottom:16px;}
+.pricing-subline{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px;}
+.pricing-trust{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-align:center;margin-top:18px;}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:20px;}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 22px;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s,transform .25s;position:relative;overflow:hidden;}
+.plan::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,247,.03),transparent 60%);pointer-events:none;opacity:.8;}
+.plan:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(79,142,247,.6);box-shadow:0 10px 38px rgba(34,211,238,.25),0 0 36px rgba(79,142,247,.18);}
+.plan:hover::before{background:linear-gradient(135deg,rgba(126,232,162,.08),rgba(79,142,247,.08));}
+.plan.featured{transform:scale(1.05);border:2px solid rgba(126,232,162,.6);background:rgba(8,14,21,.9);box-shadow:0 0 38px rgba(126,232,162,.25),0 0 18px rgba(79,142,247,.12);}
+.plan.featured .plan-badge{box-shadow:0 0 20px rgba(126,232,162,.65);animation:badgePulse 2.8s ease-in-out infinite;}
+@keyframes badgePulse{0%,100%{transform:scale(1);box-shadow:0 0 14px rgba(126,232,162,.7);}50%{transform:scale(1.03);box-shadow:0 0 24px rgba(126,232,162,.95);}}
+.plan-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--cyan));padding:5px 11px;border-radius:999px;display:inline-block;margin-bottom:16px;text-transform:uppercase;font-weight:700;align-self:flex-start;}
+.plan-name{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:500;margin-bottom:10px;}
+.plan-price{font-family:'DM Mono',monospace;font-size:2.3rem;font-weight:700;color:var(--accent);margin-bottom:4px;line-height:1;}
+.plan-price-old{font-family:'DM Mono',monospace;font-size:0.92rem;color:var(--muted);opacity:.5;text-decoration:line-through;margin-bottom:6px;}
+.plan-installment{font-family:'DM Mono',monospace;font-size:1rem;font-weight:600;color:var(--cyan);margin-bottom:6px;}
+.plan-price-note{font-size:.85rem;color:var(--muted);margin-bottom:14px;font-weight:400;}
+.plan-divider{height:1px;background:var(--border);margin-bottom:16px;}
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;}
 .plan-features li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;transition:color .2s,padding-left .2s;}
 .plan-features li:hover{color:var(--text);padding-left:3px;}
-.plan-features li::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:7px;box-shadow:0 0 5px rgba(126,232,162,.4);}
-.plan-features li.hl{color:var(--text);font-weight:400;}
-.plan-monthly{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.04em;}
+.plan-features li::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:8px;box-shadow:0 0 8px rgba(126,232,162,.45);}
+.plan-features li.hl{color:var(--text);font-weight:500;}
+.plan-monthly{margin-top:16px;padding-top:18px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.05em;}
+.plan-cta{margin-top:20px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--cyan));color:var(--bg);font-family:'DM Mono',monospace;font-size:13px;font-weight:700;padding:12px 22px;border-radius:999px;text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.plan-cta:hover{transform:scale(1.04);box-shadow:0 0 20px rgba(126,232,162,.45),0 0 28px rgba(79,142,247,.3);}
+.plan-cta::after{content:'→';transition:transform .2s;}
+.plan-cta:hover::after{transform:translateX(4px);}
+@media(max-width:900px){
+  .plans{grid-template-columns:1fr 1fr;}
+  .plan.featured{order:-1;}
+}
+@media(max-width:600px){
+  .pricing-section{margin-bottom:64px;}
+  .plans{grid-template-columns:1fr;}
+  .plan{padding:20px;}
+  .plan-cta{width:100%;padding:1rem;}
+  .plan-price{font-size:1.9rem;}
+  .plan-price-old{font-size:.85rem;}
+  .plan-installment{font-size:.95rem;}
+}
 
 /* ── HOW ── */
 .how{margin-bottom:80px;}
@@ -495,55 +518,73 @@ footer span{color:var(--accent);}
   </section>
 
   <!-- PLANOS -->
-  <div class="section-label">Planos</div>
-  <div class="plans">
-    <div class="plan reveal">
-      <div class="plan-name">Landing Page</div>
-      <div class="plan-price">R$ 397 <span style="color:var(--muted);font-size:.78rem;text-decoration:line-through;display:inline-block;margin-left:8px;">R$ 997</span></div>
-      <div class="plan-price-note">ou 12x de R$ 38,90 • pagamento único na criação</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li class="hl">1 página completa</li>
-        <li>Apresentação do negócio</li>
-        <li>Botão WhatsApp</li>
-        <li>Design responsivo (celular)</li>
-        <li>Entrega em até 5 dias</li>
-      </ul>
-      <div class="plan-monthly">+ R$ 80/mês · hospedagem e suporte</div>
+  <section class="pricing-section">
+    <div class="pricing-header">
+      <h2>Escolha o plano ideal para tirar sua ideia do papel</h2>
+      <p>Sites modernos, rápidos e pensados para gerar presença, autoridade e vendas.</p>
     </div>
-    <div class="plan featured reveal">
-      <div class="plan-badge">Mais popular</div>
-      <div class="plan-name">Site Institucional</div>
-      <div class="plan-price">R$ 897 <span style="color:var(--muted);font-size:.78rem;text-decoration:line-through;display:inline-block;margin-left:8px;">R$ 1.997</span></div>
-      <div class="plan-price-note">ou 12x de R$ 87,90 • pagamento único na criação</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li class="hl">Até 5 páginas</li>
-        <li>Home, Sobre, Serviços, Contato</li>
-        <li>Formulário de contato</li>
-        <li>Google Maps integrado</li>
-        <li>Design responsivo</li>
-        <li>SEO básico</li>
-        <li>Entrega em até 10 dias</li>
-      </ul>
-      <div class="plan-monthly">+ R$ 120/mês · hospedagem e suporte</div>
+    <p class="pricing-subline">Mais de 100 projetos entregues</p>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <div class="plan-name">Landing Page</div>
+        <div class="plan-price">R$ 397</div>
+        <div class="plan-price-old">R$ 997</div>
+        <div class="plan-installment">ou 12x de R$ 38,90</div>
+        <div class="plan-price-note">pagamento único na criação</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="hl">1 página completa</li>
+          <li>Apresentação do negócio</li>
+          <li>Botão WhatsApp</li>
+          <li>Design responsivo (celular)</li>
+          <li>Entrega em até 5 dias</li>
+        </ul>
+        <div class="plan-monthly">+ R$ 80/mês · hospedagem e suporte</div>
+        <a class="plan-cta" href="https://wa.me/5573982277649?text=Ol%C3%A1%20Thiago%2C%20quero%20um%20site!" target="_blank">Quero este plano</a>
+      </div>
+
+      <div class="plan featured reveal">
+        <div class="plan-badge">MAIS ESCOLHIDO</div>
+        <div class="plan-name">Site Institucional</div>
+        <div class="plan-price">R$ 897</div>
+        <div class="plan-price-old">R$ 1.997</div>
+        <div class="plan-installment">ou 12x de R$ 87,90</div>
+        <div class="plan-price-note">pagamento único na criação</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="hl">Até 5 páginas</li>
+          <li>Home, Sobre, Serviços, Contato</li>
+          <li>Formulário de contato</li>
+          <li>Google Maps integrado</li>
+          <li>Design responsivo</li>
+          <li>SEO básico</li>
+          <li>Entrega em até 10 dias</li>
+        </ul>
+        <div class="plan-monthly">+ R$ 120/mês · hospedagem e suporte</div>
+        <a class="plan-cta" href="https://wa.me/5573982277649?text=Ol%C3%A1%20Thiago%2C%20quero%20um%20site!" target="_blank">Quero este plano</a>
+      </div>
+
+      <div class="plan reveal">
+        <div class="plan-name">Personalizado</div>
+        <div class="plan-price">sob consulta</div>
+        <div class="plan-price-note">orçamento sem compromisso</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="hl">Projeto sob medida</li>
+          <li>E-commerce / loja virtual</li>
+          <li>Painel administrativo</li>
+          <li>Blog ou portfólio</li>
+          <li>Integrações específicas</li>
+          <li>Funcionalidades em Python</li>
+        </ul>
+        <div class="plan-monthly">mensalidade conforme o projeto</div>
+        <a class="plan-cta" href="https://wa.me/5573982277649?text=Ol%C3%A1%20Thiago%2C%20quero%20um%20site!" target="_blank">Quero este plano</a>
+      </div>
     </div>
-    <div class="plan reveal">
-      <div class="plan-name">Personalizado</div>
-      <div class="plan-price">sob consulta</div>
-      <div class="plan-price-note">orçamento sem compromisso</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li class="hl">Projeto sob medida</li>
-        <li>E-commerce / loja virtual</li>
-        <li>Painel administrativo</li>
-        <li>Blog ou portfólio</li>
-        <li>Integrações específicas</li>
-        <li>Funcionalidades em Python</li>
-      </ul>
-      <div class="plan-monthly">mensalidade conforme o projeto</div>
-    </div>
-  </div>
+
+    <p class="pricing-trust">Sem mensalidade escondida. Você paga uma vez e recebe um site profissional pronto para usar.</p>
+  </section>
 
   <!-- COMO FUNCIONA -->
   <div class="section-label">Como funciona</div>
